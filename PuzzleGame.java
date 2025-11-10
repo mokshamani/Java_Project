@@ -11,6 +11,13 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import java.net.URL;
 import java.util.*;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
+import java.util.ArrayList;
+import java.util.Collections;
+
+
+
 
 public class PuzzleGame extends Application {
 
@@ -31,18 +38,22 @@ public class PuzzleGame extends Application {
             grid.setHgap(4);
             grid.setVgap(4);
 
-            // Create puzzle tiles
-            for (int row = 0; row < SIZE; row++) {
-                for (int col = 0; col < SIZE; col++) {
-                    ImageView iv = new ImageView(image);
-                    iv.setFitWidth(TILE_SIZE);
-                    iv.setFitHeight(TILE_SIZE);
-                    iv.setViewport(new javafx.geometry.Rectangle2D(
-                            col * TILE_SIZE, row * TILE_SIZE, TILE_SIZE, TILE_SIZE));
-                    iv.setUserData(row * SIZE + col);
-                    tiles.add(iv);
-                }
+       // Split image into 9 tiles
+        double pieceWidth = image.getWidth() / SIZE;
+        double pieceHeight = image.getHeight() / SIZE;
+
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
+                ImageView iv = new ImageView(image);
+                iv.setViewport(new javafx.geometry.Rectangle2D(
+                        j * pieceWidth, i * pieceHeight, pieceWidth, pieceHeight
+                ));
+                iv.setFitWidth(TILE_SIZE);
+                iv.setFitHeight(TILE_SIZE);
+                tiles.add(iv);
             }
+        }
+
 
             // Make last tile blank
             blankTile = new ImageView();
@@ -54,7 +65,7 @@ public class PuzzleGame extends Application {
             // Shuffle tiles
             Collections.shuffle(tiles);
 
-            updateGrid();
+            refreshGrid();
 
             for (ImageView iv : tiles) {
                 iv.setOnMouseClicked(e -> moveTile(iv));
@@ -63,7 +74,7 @@ public class PuzzleGame extends Application {
             Button shuffleBtn = new Button("🔀 Shuffle");
             shuffleBtn.setOnAction(e -> {
                 Collections.shuffle(tiles);
-                updateGrid();
+                refreshGrid();
             });
 
             VBox root = new VBox(20, grid, shuffleBtn);
@@ -82,14 +93,18 @@ public class PuzzleGame extends Application {
         }
     }
 
-    private void updateGrid() {
+    private void refreshGrid() {
         grid.getChildren().clear();
-        for (int i = 0; i < tiles.size(); i++) {
+        for (int i = 0; i < SIZE * SIZE; i++) {
             int row = i / SIZE;
             int col = i % SIZE;
-            grid.add(tiles.get(i), col, row);
+            ImageView tile = tiles.get(i);
+
+            tile.setOnMouseClicked(e -> moveTile(tile));
+            grid.add(tile, col, row);
         }
     }
+
 
     private void moveTile(ImageView clicked) {
         if (clicked == blankTile) return;
@@ -122,6 +137,14 @@ public class PuzzleGame extends Application {
                 || (a == b + SIZE);
     }
 
+    private boolean isSolved() {
+        for (int i = 0; i < tiles.size() - 1; i++) {
+            if (tiles.get(i) == blankTile) return false;
+        }
+        return true;
+    }
+
+
     private void checkWin() {
         for (int i = 0; i < tiles.size(); i++) {
             if ((int) tiles.get(i).getUserData() != i && tiles.get(i) != blankTile)
@@ -135,3 +158,4 @@ public class PuzzleGame extends Application {
         launch();
     }
 }
+
