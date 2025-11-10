@@ -1,0 +1,53 @@
+/* Grid background */
+.grid-pane {
+    -fx-background-color: linear-gradient(to bottom right, #fffae3, #ffd6d6);
+    -fx-padding: 5;
+    -fx-border-color: #333;
+    -fx-border-width: 4;
+    -fx-border-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 8, 0, 0, 2);
+}
+
+/* All numbered tiles */
+.image-view {
+    -fx-border-color: #555;
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 2);
+    -fx-background-color: #fff;
+    -fx-opacity: 0.95;
+}
+
+/* Hover effect for tiles */
+.image-view:hover {
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 10, 0, 0, 4);
+}
+
+/* Blank tile */
+.blank-tile {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #aaa;
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+}
+
+/* Shuffle button */
+.button {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-background-color: linear-gradient(to bottom, #ff7f50, #ff4500);
+    -fx-text-fill: white;
+    -fx-padding: 10 20 10 20;
+    -fx-background-radius: 10;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 5, 0, 0, 2);
+}
+
+.button:hover {
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+    -fx-background-color: linear-gradient(to bottom, #ff6347, #ff2e00);
+}
