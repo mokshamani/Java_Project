@@ -5,7 +5,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import java.net.URL;
@@ -125,12 +124,16 @@ public class PuzzleGame extends Application {
                 || (a == b + SIZE);
     }
 
-    private boolean isSolved() {
-        for (int i = 0; i < tiles.size(); i++) {
-            if (!tiles.get(i).getUserData().equals(correctOrder.get(i).getUserData())) {
-                return false;
-            }
-        }
+   private boolean isSolved() {
+    for (int i = 0; i < tiles.size(); i++) {
+        ImageView tile = tiles.get(i);
+        int correctId = (int) tile.getUserData();
+        if (i != correctId) {
+            return false;
+}
+    }
+    return true;
+}
 
 
 
@@ -146,6 +149,7 @@ public class PuzzleGame extends Application {
         launch();
     }
 }
+
 
 
 
