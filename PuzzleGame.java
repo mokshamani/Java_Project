@@ -124,15 +124,21 @@ public class PuzzleGame extends Application {
                 || (a == b + SIZE);
     }
 
-   private boolean isSolved() {
-    for (int i = 0; i < tiles.size(); i++) {
-        ImageView tile = tiles.get(i);
-        int correctId = (int) tile.getUserData();
-        if (i != correctId) {
+  private boolean isSolved() {
+    for (int i = 0; i < tiles.size() - 1; i++) { // ignore last tile (blank)
+        int correctIndex = (int) tiles.get(i).getUserData();
+        if (i != correctIndex) {
             return false;
-}
+        }
     }
-    return true;
+    // last tile must be the blank tile
+    return tiles.get(tiles.size() - 1) == findBlankTile();
+}
+private ImageView findBlankTile() {
+    for (ImageView tile : tiles) {
+        if (tile.getUserData().equals(SIZE * SIZE - 1)) return tile;
+    }
+    return null;
 }
 
 
@@ -149,6 +155,7 @@ public class PuzzleGame extends Application {
         launch();
     }
 }
+
 
 
 
