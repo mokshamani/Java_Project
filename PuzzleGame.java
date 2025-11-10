@@ -124,13 +124,20 @@ public class PuzzleGame extends Application {
                 || (a == b + SIZE);
     }
 
-// Check if all numbered tiles are in correct order, ignore blank
 private boolean isSolved() {
-    for (int i = 0; i < tiles.size() - 1; i++) { // only numbered tiles
-        int correctIndex = (int) tiles.get(i).getUserData();
-        if (i != correctIndex) return false;
+    // Blank tile must be in the bottom-right corner
+    if (tiles.get(tiles.size() - 1) != blankTile) {
+        return false;
     }
-    return true; // solved if all numbered tiles are in correct order
+    // Check if every tile is in the correct position
+    for (int i = 0; i < tiles.size() - 1; i++) {
+        ImageView tile = tiles.get(i);
+        int correctIndex = (int) tile.getUserData();
+        if (i != correctIndex) {
+            return false;
+        }
+    }
+    return true;
 }
 
 
@@ -146,6 +153,7 @@ private boolean isSolved() {
         launch();
     }
 }
+
 
 
 
