@@ -15,7 +15,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import java.util.ArrayList;
 import java.util.Collections;
-
+import java.io.FileInputStream;
 
 
 
@@ -28,10 +28,9 @@ public class PuzzleGame extends Application {
     private GridPane grid;
 
     @Override
-    public void start(Stage stage) {
-        try {
-            URL url = new URL("https://static.vecteezy.com/system/resources/previews/028/794/706/non_2x/cartoon-cute-school-boy-photo.jpg");
-            Image image = new Image(url.openStream(), TILE_SIZE * SIZE, TILE_SIZE * SIZE, false, true);
+        public void start(Stage stage) throws Exception {
+        Image image = new Image(new FileInputStream("anime.jpg")); 
+
 
             grid = new GridPane();
             grid.setAlignment(Pos.CENTER);
@@ -145,17 +144,17 @@ public class PuzzleGame extends Application {
     }
 
 
-    private void checkWin() {
-        for (int i = 0; i < tiles.size(); i++) {
-            if ((int) tiles.get(i).getUserData() != i && tiles.get(i) != blankTile)
-                return;
-        }
-        Alert alert = new Alert(Alert.AlertType.INFORMATION, "🎉 You Won!");
+    private void showWinAlert() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("🎉 Congratulations!");
+        alert.setHeaderText(null);
+        alert.setContentText("You solved the puzzle!");
         alert.showAndWait();
-    }
+
 
     public static void main(String[] args) {
         launch();
     }
 }
+
 
