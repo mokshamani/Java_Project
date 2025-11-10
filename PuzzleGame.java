@@ -1,4 +1,3 @@
-import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -105,29 +104,19 @@ public class PuzzleGame extends Application {
     }
 
 
-    private void moveTile(ImageView clicked) {
-        if (clicked == blankTile) return;
-
+   private void moveTile(ImageView clicked) {
         int ci = tiles.indexOf(clicked);
         int bi = tiles.indexOf(blankTile);
 
         if (isAdjacent(ci, bi)) {
             Collections.swap(tiles, ci, bi);
-            animateMove(clicked, ci, bi);
-            updateGrid();
-            checkWin();
+            refreshGrid();
+            if (isSolved()) showWinAlert();
+
         }
     }
 
-    private void animateMove(ImageView tile, int fromIndex, int toIndex) {
-        int fromRow = fromIndex / SIZE, fromCol = fromIndex % SIZE;
-        int toRow = toIndex / SIZE, toCol = toIndex % SIZE;
 
-        TranslateTransition tt = new TranslateTransition(Duration.millis(150), tile);
-        tt.setByX((toCol - fromCol) * (TILE_SIZE + 4));
-        tt.setByY((toRow - fromRow) * (TILE_SIZE + 4));
-        tt.play();
-    }
 
     private boolean isAdjacent(int a, int b) {
         return (a == b - 1 && b % SIZE != 0)
@@ -137,11 +126,12 @@ public class PuzzleGame extends Application {
     }
 
     private boolean isSolved() {
-        for (int i = 0; i < tiles.size() - 1; i++) {
-            if (tiles.get(i) == blankTile) return false;
+        for (int i = 0; i < tiles.size(); i++) {
+            if (!tiles.get(i).getUserData().equals(correctOrder.get(i).getUserData())) {
+                return false;
+            }
         }
-        return true;
-    }
+
 
 
     private void showWinAlert() {
@@ -156,5 +146,6 @@ public class PuzzleGame extends Application {
         launch();
     }
 }
+
 
 
