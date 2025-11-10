@@ -124,23 +124,14 @@ public class PuzzleGame extends Application {
                 || (a == b + SIZE);
     }
 
-  private boolean isSolved() {
-    for (int i = 0; i < tiles.size() - 1; i++) { // ignore last tile (blank)
+// Check if all numbered tiles are in correct order, ignore blank
+private boolean isSolved() {
+    for (int i = 0; i < tiles.size() - 1; i++) { // only numbered tiles
         int correctIndex = (int) tiles.get(i).getUserData();
-        if (i != correctIndex) {
-            return false;
-        }
+        if (i != correctIndex) return false;
     }
-    // last tile must be the blank tile
-    return tiles.get(tiles.size() - 1) == findBlankTile();
+    return true; // solved if all numbered tiles are in correct order
 }
-private ImageView findBlankTile() {
-    for (ImageView tile : tiles) {
-        if (tile.getUserData().equals(SIZE * SIZE - 1)) return tile;
-    }
-    return null;
-}
-
 
 
     private void showWinAlert() {
@@ -155,6 +146,7 @@ private ImageView findBlankTile() {
         launch();
     }
 }
+
 
 
 
