@@ -1,0 +1,71 @@
+/* Main Background (VBox or Scene) */
+#root {
+    -fx-background-color: linear-gradient(to bottom, #ece9f7 0%, #ffe9f7 100%);
+}
+
+/* Puzzle Grid */
+.grid-pane {
+    -fx-background-color: linear-gradient(to right, #fff5ec, #e9fff6 85%);
+    -fx-padding: 14;
+    -fx-border-color: #bbbaff;
+    -fx-border-width: 3;
+    -fx-border-radius: 18;
+    -fx-effect: dropshadow(gaussian, #cabefd88, 14, 0.4, 0, 3);
+}
+
+/* Numbered Tiles */
+.image-view {
+    -fx-border-color: #af3b6e;
+    -fx-border-width: 3;
+    -fx-border-radius: 16;
+    -fx-cursor: hand;
+    -fx-background-color: linear-gradient(to bottom right, #fdf6fd 75%, #e1f7fa 100%);
+    -fx-opacity: 0.98;
+    -fx-effect: dropshadow(gaussian, #c18aff55, 7, 0.4, 0, 2);
+    -fx-rotate: 0;
+    -fx-transition: all 0.15s cubic-bezier(0.43,1.56,0.84,1);
+}
+
+.image-view:hover {
+    -fx-scale-x: 1.07;
+    -fx-scale-y: 1.07;
+    -fx-effect: dropshadow(gaussian, #af3b6eee, 20, 0.7, 0, 6);
+    -fx-border-color: #60a5a9;
+    -fx-background-color: linear-gradient(to right, #f2e1ee 60%, #d1f5f7 100%);
+    -fx-opacity: 1.0;
+}
+
+/* Blank tile - with soft "empty zone" effect */
+.blank-tile {
+    -fx-background-color: linear-gradient(to top left, #f8fafb 65%, #f9e9fe 100%);
+    -fx-border-color: #b6b6be;
+    -fx-border-width: 3;
+    -fx-border-radius: 16;
+    -fx-effect: dropshadow(gaussian, #babaca99, 6, 0.1, 0, 1);
+}
+
+/* Shuffle Button */
+.button {
+    -fx-font-size: 17px;
+    -fx-font-family: 'Montserrat SemiBold', 'Segoe UI', Verdana, sans-serif;
+    -fx-background-color: linear-gradient(to bottom, #ffadc4, #ad91ff 85%);
+    -fx-text-fill: white;
+    -fx-padding: 12 30 12 30;
+    -fx-background-radius: 16;
+    -fx-cursor: hand;
+    -fx-font-weight: bold;
+    -fx-border-radius: 12;
+    -fx-effect: dropshadow(gaussian, #af3b6e77, 10, 0.3, 0, 2);
+    -fx-opacity: 0.98;
+    -fx-rotate: 0;
+    -fx-transition: all 0.18s cubic-bezier(0.49,1.36,0.89,1.11);
+}
+
+.button:hover {
+    -fx-scale-x: 1.09;
+    -fx-scale-y: 1.09;
+    -fx-background-color: linear-gradient(to bottom, #ff4796 50%, #5f8bff 100%);
+    -fx-border-color: #af3b6e;
+    -fx-effect: dropshadow(gaussian, #cabefd, 24, 0.5, 0, 4);
+    -fx-opacity: 1.0;
+}
